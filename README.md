@@ -1,43 +1,61 @@
-🔗 URL Shortener
+# 🔗 URL Shortener
 
-A secure and scalable URL Shortener web application built using Java, Spring Boot, Spring Security, JWT Authentication, React, and MySQL. The application enables users to register, log in securely, create shortened URLs, manage their links, and track URL usage through an intuitive dashboard.
+A secure and scalable **URL Shortener** web application built using **Java, Spring Boot, Spring Security, JWT Authentication, React, and MySQL**. The application allows users to securely register and log in, generate shortened URLs, manage their links, and redirect users to the original URLs. It follows a full-stack architecture with a RESTful backend and a responsive React frontend.
 
-🚀 Features
-🔐 User Registration and Login using JWT Authentication
-🔒 Secure REST APIs with Spring Security
-✂️ Generate unique short URLs from long URLs
-🌐 Redirect short URLs to their original destinations
-📋 View and manage all created URLs
-🗑️ Delete previously generated URLs
-📱 Responsive and user-friendly interface
-💾 Store URL data securely in MySQL
-⚡ Fast URL redirection
-🛡️ Password encryption using BCrypt
-🛠️ Tech Stack
-Backend
-Java 21
-Spring Boot
-Spring Security
-Spring Data JPA
-JWT Authentication
-Hibernate
-Maven
-Frontend
-React
-HTML5
-CSS3
-JavaScript
-Axios
-Database
-MySQL
-Tools
-IntelliJ IDEA
-VS Code
-Postman
-Git & GitHub
-📂 Project Structure
+---
+
+## 🚀 Features
+
+* Secure user registration and login with JWT Authentication
+* Password encryption using BCrypt
+* Create unique short URLs from long URLs
+* Redirect shortened URLs to their original destinations
+* View and manage previously created URLs
+* Delete unwanted URLs
+* Responsive user interface built with React
+* RESTful APIs developed using Spring Boot
+* MySQL database integration using Spring Data JPA
+
+---
+
+## 🛠️ Tech Stack
+
+### Backend
+
+* Java 21
+* Spring Boot
+* Spring Security
+* Spring Data JPA
+* Hibernate
+* JWT (JJWT)
+* Maven
+
+### Frontend
+
+* React
+* HTML5
+* CSS3
+* JavaScript
+* Axios
+
+### Database
+
+* MySQL
+
+### Tools
+
+* IntelliJ IDEA
+* Visual Studio Code
+* Postman
+* Git & GitHub
+
+---
+
+## 📂 Project Structure
+
+```text
 url-shortener/
-│── backend/
+├── backend/
 │   ├── src/
 │   ├── controller/
 │   ├── service/
@@ -45,69 +63,109 @@ url-shortener/
 │   ├── security/
 │   └── model/
 │
-│── frontend/
+├── frontend/
 │   ├── src/
 │   ├── components/
 │   ├── pages/
 │   └── services/
 │
 └── README.md
-⚙️ Installation
-Clone the Repository
+```
+
+---
+
+## ⚙️ Installation
+
+### Clone the Repository
+
+```bash
 git clone https://github.com/sarthak425/url-shortener.git
 cd url-shortener
-Backend
+```
+
+### Backend Setup
+
+```bash
 cd backend
+```
 
-Configure your application.properties:
+Update `application.properties`:
 
+```properties
 spring.datasource.url=jdbc:mysql://localhost:3306/url_shortener
 spring.datasource.username=root
 spring.datasource.password=your_password
+```
 
-Run the Spring Boot application:
+Run the backend:
 
+```bash
 mvn spring-boot:run
-Frontend
+```
+
+### Frontend Setup
+
+```bash
 cd frontend
 npm install
 npm run dev
-🔐 Authentication Flow
-User Registration
-User Login
-JWT Token Generation
-Protected API Access
-Secure URL Management
-📸 Screenshots
+```
 
-Add screenshots of:
+---
 
-Login Page
-Register Page
-Dashboard
-URL Creation
-URL List
-URL Redirection
-📈 Future Improvements
-QR Code generation for shortened URLs
-Click analytics dashboard
-URL expiration
-Custom aliases
-User profile management
-Dark mode
-Docker deployment
-Cloud deployment (AWS, Render, Railway)
-🤝 Contributing
+## 🔐 Authentication Flow
 
-Contributions are welcome! Feel free to fork the repository, create a feature branch, and submit a pull request.
+* User Registration
+* User Login
+* JWT Token Generation
+* Protected REST APIs
+* Secure URL Management
 
-📄 License
+---
+
+## 📸 Screenshots
+
+Add screenshots of the following pages:
+
+* Login Page
+* Registration Page
+* Dashboard
+* URL Creation
+* URL Management
+* URL Redirection
+
+---
+
+## 🚀 Future Enhancements
+
+* QR Code generation for shortened URLs
+* Click analytics dashboard
+* Custom short URL aliases
+* URL expiration feature
+* User profile management
+* Dark mode support
+* Docker containerization
+* Cloud deployment (AWS, Render, Railway)
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome. Feel free to fork this repository, create a feature branch, and submit a pull request.
+
+---
+
+## 📄 License
 
 This project is licensed under the MIT License.
 
-👨‍💻 Author
+---
 
-Sarthak Khatpe
+## 👨‍💻 Author
 
-GitHub: https://github.com/sarthak425
-LinkedIn: https://www.linkedin.com/in/sarthak-khatpe-943911327/
+**Sarthak Khatpe**
+
+* GitHub: https://github.com/sarthak425
+* LinkedIn: https://www.linkedin.com/in/sarthak-khatpe-943911327/
+
+If you found this project helpful, please consider giving it a ⭐ on GitHub.
