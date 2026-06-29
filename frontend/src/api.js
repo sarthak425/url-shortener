@@ -1,0 +1,22 @@
+import axios from 'axios';
+
+const API_URL = 'http://localhost:8083/api';
+
+const api = axios.create({
+  baseURL: API_URL,
+});
+
+api.interceptors.request.use((config) => {
+  const token = localStorage.getItem('token');
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+  return config;
+});
+
+export const login = (username, password) => api.post('/auth/login', { username, password });
+export const register = (username, email, password) => api.post('/auth/register', { username, email, password });
+export const shortenUrl = (originalUrl) => api.post('/urls/shorten', { originalUrl });
+export const getUserUrls = () => api.get('/urls');
+
+export default api;
