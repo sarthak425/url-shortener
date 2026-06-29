@@ -46,10 +46,17 @@
 			</exclusions>
 		</dependency>
 
-		<!-- MySQL Connector -->
+		<!-- MySQL Connector (local dev) -->
 		<dependency>
 			<groupId>com.mysql</groupId>
 			<artifactId>mysql-connector-j</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+
+		<!-- PostgreSQL (production on Render) -->
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
 			<scope>runtime</scope>
 		</dependency>
 

@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { shortenUrl, getUserUrls } from './api';
 import './Dashboard.css';
 
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:8083';
+
 function Dashboard() {
   const [urls, setUrls] = useState([]);
   const [newUrl, setNewUrl] = useState('');
@@ -87,8 +89,8 @@ function Dashboard() {
                       </a>
                     </td>
                     <td>
-                      <a href={`http://localhost:8083/${url.shortUrl}`} target="_blank" rel="noopener noreferrer" className="short-link">
-                        {`http://localhost:8083/${url.shortUrl}`}
+                      <a href={`${BACKEND_URL}/${url.shortUrl}`} target="_blank" rel="noopener noreferrer" className="short-link">
+                        {`${BACKEND_URL}/${url.shortUrl}`}
                       </a>
                     </td>
                     <td><span className="click-count">{url.clickCount}</span></td>
