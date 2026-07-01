@@ -16,7 +16,10 @@ api.interceptors.request.use((config) => {
 
 export const login = (username, password) => api.post('/auth/login', { username, password });
 export const register = (username, email, password) => api.post('/auth/register', { username, email, password });
-export const shortenUrl = (originalUrl) => api.post('/urls/shorten', { originalUrl });
+export const shortenUrl = (originalUrl, customAlias) => api.post('/urls/shorten', { originalUrl, customAlias });
 export const getUserUrls = () => api.get('/urls');
+export const updateUrl = (id, originalUrl, customAlias) => api.put(`/urls/${id}`, { originalUrl, customAlias });
+export const deleteUrl = (id) => api.delete(`/urls/${id}`);
+export const getUrlAnalytics = (id) => api.get(`/urls/${id}/analytics`);
 
 export default api;

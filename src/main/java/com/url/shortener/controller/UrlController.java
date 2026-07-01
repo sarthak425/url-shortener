@@ -29,6 +29,7 @@ public class UrlController {
     @PostMapping("/shorten")
     public ResponseEntity<?> shortenUrl(@RequestBody Map<String, String> request) {
         String originalUrl = request.get("originalUrl");
+        String customAlias = request.get("customAlias");
         if (originalUrl == null || originalUrl.isEmpty()) {
             return ResponseEntity.badRequest().body("Error: Original URL is required");
         }
@@ -41,8 +42,69 @@ public class UrlController {
             return ResponseEntity.badRequest().body("Error: User not found");
         }
 
-        UrlMapping urlMapping = urlService.shortenUrl(originalUrl, user);
-        return ResponseEntity.ok(convertToDto(urlMapping));
+        try {
+            UrlMapping urlMapping = urlService.shortenUrl(originalUrl, customAlias, user);
+            return ResponseEntity.ok(convertToDto(urlMapping));
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<?> updateUrl(@PathVariable Long id, @RequestBody Map<String, String> request) {
+        String originalUrl = request.get("originalUrl");
+        String customAlias = request.get("customAlias");
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
+        User user = userRepository.findByUsername(userDetails.getUsername()).orElse(null);
+
+        if (user == null) {
+            return ResponseEntity.badRequest().body("Error: User not found");
+        }
+
+        try {
+            UrlMapping urlMapping = urlService.updateUrlMapping(id, originalUrl, customAlias, user);
+            return ResponseEntity.ok(convertToDto(urlMapping));
+        } catch (IllegalArgumentException | SecurityException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteUrl(@PathVariable Long id) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
+        User user = userRepository.findByUsername(userDetails.getUsername()).orElse(null);
+
+        if (user == null) {
+            return ResponseEntity.badRequest().body("Error: User not found");
+        }
+
+        try {
+            urlService.deleteUrlMapping(id, user);
+            return ResponseEntity.ok(Map.of("message", "URL mapping deleted successfully"));
+        } catch (IllegalArgumentException | SecurityException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @GetMapping("/{id}/analytics")
+    public ResponseEntity<?> getAnalytics(@PathVariable Long id) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
+        User user = userRepository.findByUsername(userDetails.getUsername()).orElse(null);
+
+        if (user == null) {
+            return ResponseEntity.badRequest().body("Error: User not found");
+        }
+
+        try {
+            Map<String, Long> analytics = urlService.getClickAnalytics(id, user);
+            return ResponseEntity.ok(analytics);
+        } catch (IllegalArgumentException | SecurityException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 
     @GetMapping

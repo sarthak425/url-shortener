@@ -6,8 +6,6 @@ services:
   - type: web
     name: url-shortener-api
     runtime: docker
-    repo: https://github.com/sarthak425/url-shortener.git
-    branch: main
     dockerfilePath: ./Dockerfile
     envVars:
       - key: DATABASE_HOST
@@ -41,8 +39,6 @@ services:
   - type: web
     name: url-shortener-frontend
     runtime: static
-    repo: https://github.com/sarthak425/url-shortener.git
-    branch: main
     rootDir: frontend
     buildCommand: npm install && npm run build
     staticPublishPath: dist
@@ -64,3 +60,4 @@ databases:
   - name: url-shortener-db
     plan: free
     databaseName: urlshortener
+

@@ -25,9 +25,20 @@ public class RedirectController {
     @Autowired
     private ClickEventRepository clickEventRepository;
 
-    @GetMapping("/{shortUrl}")
+    @GetMapping("/{*shortUrl}")
     public ResponseEntity<Void> redirect(@PathVariable String shortUrl) {
-        Optional<UrlMapping> urlMappingOpt = urlMappingRepository.findByShortURL(shortUrl);
+        if (shortUrl == null) {
+            return ResponseEntity.notFound().build();
+        }
+        String cleanShortUrl = shortUrl;
+        while (cleanShortUrl.startsWith("/")) {
+            cleanShortUrl = cleanShortUrl.substring(1);
+        }
+        while (cleanShortUrl.endsWith("/")) {
+            cleanShortUrl = cleanShortUrl.substring(0, cleanShortUrl.length() - 1);
+        }
+
+        Optional<UrlMapping> urlMappingOpt = urlMappingRepository.findByShortURL(cleanShortUrl);
 
         if (urlMappingOpt.isPresent()) {
             UrlMapping urlMapping = urlMappingOpt.get();
